@@ -5,7 +5,7 @@ export default class search extends Component {
   render() {
     return (
       <View style={styles.viewBody}>
-        <Text>search screen .. </Text>
+        <Text>Pagina para buscar zonas especificas </Text>
       </View>
     );
   }

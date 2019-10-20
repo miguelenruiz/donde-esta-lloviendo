@@ -5,7 +5,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.viewBody}>
-        <Text>Home screen .. </Text>
+        <Text>Home donde estara toda la informacion del tiempo </Text>
       </View>
     );
   }

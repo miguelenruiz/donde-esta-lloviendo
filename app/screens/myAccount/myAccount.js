@@ -9,7 +9,7 @@ export default class Account extends Component {
   render() {
     return (
       <View style={styles.viewBody}>
-        <Text>Account screen .. </Text>
+        <Text>Aqui se mostrara el perfil de usuario </Text>
         <Button title="Registro" onPress={() => this.goToScreen("Register")} />
       </View>
     );
