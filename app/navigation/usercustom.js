@@ -10,9 +10,10 @@ import HomeScreen from "../screens/home";
 import AccountScreen from "../screens/myAccount/myAccount";
 import SearchScreen from "../screens/search";
 import RegisterScreen from "../screens/myAccount/register";
+import LoginScreen from "../screens/myAccount/login";
 
 const HomeScreenStack = createStackNavigator({
-  Home: {
+  Inicio: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }) => ({
       title: "Home"
@@ -21,7 +22,7 @@ const HomeScreenStack = createStackNavigator({
 });
 
 const SearchScreenStack = createStackNavigator({
-  Search: {
+  Buscar: {
     screen: SearchScreen,
     navigationOptions: ({ navigation }) => ({
       title: "Busqueda"
@@ -30,60 +31,64 @@ const SearchScreenStack = createStackNavigator({
 });
 
 const AccountScreenStack = createStackNavigator({
-  Account: {
+  Perfil: {
     screen: AccountScreen,
     navigationOptions: ({ navigation }) => ({
       title: "Mi perfil"
     })
   },
-  Register: {
+  Registro: {
     screen: RegisterScreen,
     navigationOptions: ({ navigation }) => ({
       title: "Registro"
+    })
+  },
+
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: "Login"
     })
   }
 });
 
 const RootStack = createBottomTabNavigator(
   {
-    Home: {
+    Inicio: {
       screen: HomeScreenStack,
       navigationOptions: ({ navigation }) => ({
-        tabBarLabel: "Home",
         tabBarIcon: ({ tintColor }) => (
           <Icon
             name="home"
             type="material-community"
-            size={35}
+            size={25}
             color={tintColor}
           />
         )
       })
     },
 
-    Account: {
+    Perfil: {
       screen: AccountScreenStack,
       navigationOptions: ({ navigation }) => ({
-        tabBarLabel: "Mi perfil",
         tabBarIcon: ({ tintColor }) => (
           <Icon
             name="account"
             type="material-community"
-            size={35}
+            size={25}
             color={tintColor}
           />
         )
       })
     },
-    Search: {
+    Buscar: {
       screen: SearchScreenStack,
       navigationOptions: ({ navigation }) => ({
-        tabBarLabel: "Buscar",
         tabBarIcon: ({ tintColor }) => (
           <Icon
             name="cloud-search"
             type="material-community"
-            size={35}
+            size={25}
             color={tintColor}
           />
         )
@@ -92,11 +97,11 @@ const RootStack = createBottomTabNavigator(
   },
 
   {
-    initialRouteName: "Account",
-    order: ["Home", "Search", "Account"],
+    initialRouteName: "Perfil",
+    order: ["Inicio", "Buscar", "Perfil"],
     tabBarOptions: {
       inactiveTintColor: "#646464",
-      activeTintColor: "#00a680"
+      activeTintColor: "#08088A"
     }
   }
 );

@@ -33,6 +33,8 @@ export default class Account extends Component {
         this.setState({
           formErrorMessaje: ""
         });
+
+        // registro con firebase
         fireBase
           .auth()
           .createUserWithEmailAndPassword(validate.email, validate.password)
