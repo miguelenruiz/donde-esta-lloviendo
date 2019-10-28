@@ -21,9 +21,11 @@ export const LoginOptions = {
     password: {
       template: inputTemplate,
       config: {
-        placeholder: "Escribe tu email",
-        iconName: "email",
-        iconType: "material-community"
+        password: true,
+        placeholder: "Escribe tu contraseña",
+        iconName: "lock-outline",
+        iconType: "material-community",
+        secureTextEntry: true
       }
     }
   }

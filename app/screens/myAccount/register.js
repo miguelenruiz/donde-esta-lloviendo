@@ -40,7 +40,7 @@ export default class Account extends Component {
           .createUserWithEmailAndPassword(validate.email, validate.password)
           .then(resolve => {
             this.refs.toast.show("Registro exitoso", 500, () => {
-              this.props.navigation.navigate("Account");
+              this.props.navigation.navigate("Perfil");
             });
           })
           .catch(err => {
