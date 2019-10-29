@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
-import { Image, Button } from "react-native-elements";
+import { Image, Button, SocialIcon ,Divider } from "react-native-elements";
 import { Assets } from "react-navigation-stack";
 import t from "tcomb-form-native";
 import { LoginStruct, LoginOptions } from "../../forms/login";
-import * as fireBase from "firebase";
 import { validate } from "tcomb-validation";
 import Toast, { DURATION } from "react-native-easy-toast";
+import firebase from 'firebase'
+import { facebookApi }  from '../../utils/social'; 
+
+
+
 
 const Form = t.form.Form;
 export default class Login extends Component {
@@ -22,7 +26,7 @@ export default class Login extends Component {
       },
       loginErrorMessage: ""
     };
-  }
+ }
 
   login = formValue => {
     const validateForm = this.refs.loginForm.getValue();
@@ -47,6 +51,14 @@ export default class Login extends Component {
           this.refs.toasLogin.show("Login Incorrecto ", 2500);
         });
     }
+  };
+ 
+
+  loginFacebook = async () =>{
+    const {type , token } = await  Expo.Facebook.logInWithReadPermissionsAsync(facebookApi.aplication_id,
+      {permissions : facebookApi.aplication_id}
+      
+      );
   };
 
   onChangeFormLogin = formValue => {
@@ -78,6 +90,22 @@ export default class Login extends Component {
             onPress={() => this.login()}
             title="login"
           ></Button>
+
+          <Divider style= {styles.Divider} />
+        
+
+          <SocialIcon
+            title='Iniciar sesion con Facebook'
+            button
+            type='facebook'
+            onPress = {()=> this.loginFacebook()}
+          />
+
+          <SocialIcon
+            title='Iniciar sesion con Google'
+            button
+            type='google'
+          />
           <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
         </View>
         <Toast
@@ -121,5 +149,9 @@ const styles = StyleSheet.create({
     color: "#f00",
     textAlign: "center",
     marginTop: 20
+  },
+  Divider:{
+    backgroundColor :"#08088A",
+    marginBottom :20
   }
 });
