@@ -6,18 +6,10 @@ import t from "tcomb-form-native";
 import { LoginStruct, LoginOptions } from "../../forms/login";
 import { validate } from "tcomb-validation";
 import Toast, { DURATION } from "react-native-easy-toast";
-<<<<<<< HEAD
-import firebase from 'firebase'
-import { facebookApi }  from '../../utils/social'; 
-import {Expo} from 'expo';
-import * as Facebook from 'expo-facebook';
-
-
-
-=======
 import firebase from "firebase";
-import facebookApi from "../../utils/social";
->>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
+import { facebookApi } from "../../utils/social";
+import { Expo } from "expo";
+import * as Facebook from "expo-facebook";
 
 const Form = t.form.Form;
 export default class Login extends Component {
@@ -60,45 +52,12 @@ export default class Login extends Component {
     }
   };
 
-<<<<<<< HEAD
-  async loginFacebook  () {
-  
-   
-          const {type, token } = await  Facebook.logInWithReadPermissionsAsync(facebookApi.aplication_id,   {
-          permissions: facebookApi.permissions
-          }
-        );
-
-        if(type== "success"){
-          const credential = firebase.auth.FacebookAuthProvider.credential(token);
-          firebase.auth().signInWithCredential(credential).then(() => {
-            this.refs.toasLogin.show("Login correcto", 100 , ()=>{
-              this.props.navigation.goBack(); 
-            });
-          })
-          .catch(err => {
-            this.refs.toasLogin.show("error accediendo a facebook ",300);
-          });
-
-
-        } else if(type == "cancel"){
-
-          this.refs.toasLogin.show("Inicio de sesion cancelado ", 300)
-        }else{
-          this.refs.toasLogin.show("Error desconocido  ", 300)
-        }
-
-       
-          
-  
-=======
   // permite login con facebook
   loginFacebook = async () => {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
       facebookApi.aplication_id,
       { permissions: facebookApi.permissions }
     );
->>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
   };
 
   onChangeFormLogin = formValue => {
@@ -129,13 +88,17 @@ export default class Login extends Component {
             ButtonStyle={styles.ViewButton}
             onPress={() => this.login()}
             title="login"
-          ></Button> 
+          ></Button>
 
-
-          <Text style={styles.TextRegistro}>Aun no tienes una cuenta ? <Text style={styles.btnRegister}  
-            onPress ={() => this.props.navigation.navigate("Registro")}
-          
-          >Registrate</Text></Text>
+          <Text style={styles.TextRegistro}>
+            Aun no tienes una cuenta ?{" "}
+            <Text
+              style={styles.btnRegister}
+              onPress={() => this.props.navigation.navigate("Registro")}
+            >
+              Registrate
+            </Text>
+          </Text>
 
           <Divider style={styles.Divider} />
 
@@ -146,12 +109,8 @@ export default class Login extends Component {
             onPress={() => this.loginFacebook()}
           />
 
-<<<<<<< HEAD
-        <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
-=======
           <SocialIcon title="Iniciar sesion con Google" button type="google" />
           <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
->>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
         </View>
         <Toast
           ref="toasLogin"
@@ -171,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     marginLeft: 30,
-    marginRight: 30 
+    marginRight: 30
   },
   ViewButton: {
     backgroundColor: "#08088A",
@@ -196,28 +155,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
-<<<<<<< HEAD
-  Divider:{
-    backgroundColor :"#08088A",
-    marginBottom :20
-  },
-  TextRegistro:{
- 
-    marginTop : 15 ,
-    marginLeft : 15,
-    marginRight :15
-
-  },
-  btnRegister:{
-
-      color: "#00a680",
-      fontWeight : "bold",
-
-
-=======
   Divider: {
     backgroundColor: "#08088A",
     marginBottom: 20
->>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
   }
 });
