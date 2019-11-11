@@ -8,6 +8,8 @@ import { validate } from "tcomb-validation";
 import Toast, { DURATION } from "react-native-easy-toast";
 import firebase from 'firebase'
 import { facebookApi }  from '../../utils/social'; 
+import {Expo} from 'expo';
+import * as Facebook from 'expo-facebook';
 
 
 
@@ -54,11 +56,36 @@ export default class Login extends Component {
   };
  
 
-  loginFacebook = async () =>{
-    const {type , token } = await  Expo.Facebook.logInWithReadPermissionsAsync(facebookApi.aplication_id,
-      {permissions : facebookApi.aplication_id}
-      
-      );
+  async loginFacebook  () {
+  
+   
+          const {type, token } = await  Facebook.logInWithReadPermissionsAsync(facebookApi.aplication_id,   {
+          permissions: facebookApi.permissions
+          }
+        );
+
+        if(type== "success"){
+          const credential = firebase.auth.FacebookAuthProvider.credential(token);
+          firebase.auth().signInWithCredential(credential).then(() => {
+            this.refs.toasLogin.show("Login correcto", 100 , ()=>{
+              this.props.navigation.goBack(); 
+            });
+          })
+          .catch(err => {
+            this.refs.toasLogin.show("error accediendo a facebook ",300);
+          });
+
+
+        } else if(type == "cancel"){
+
+          this.refs.toasLogin.show("Inicio de sesion cancelado ", 300)
+        }else{
+          this.refs.toasLogin.show("Error desconocido  ", 300)
+        }
+
+       
+          
+  
   };
 
   onChangeFormLogin = formValue => {
@@ -89,7 +116,13 @@ export default class Login extends Component {
             ButtonStyle={styles.ViewButton}
             onPress={() => this.login()}
             title="login"
-          ></Button>
+          ></Button> 
+
+
+          <Text style={styles.TextRegistro}>Aun no tienes una cuenta ? <Text style={styles.btnRegister}  
+            onPress ={() => this.props.navigation.navigate("Registro")}
+          
+          >Registrate</Text></Text>
 
           <Divider style= {styles.Divider} />
         
@@ -101,12 +134,7 @@ export default class Login extends Component {
             onPress = {()=> this.loginFacebook()}
           />
 
-          <SocialIcon
-            title='Iniciar sesion con Google'
-            button
-            type='google'
-          />
-          <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
+        <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
         </View>
         <Toast
           ref="toasLogin"
@@ -125,8 +153,8 @@ const styles = StyleSheet.create({
   ViewBody: {
     flex: 1,
     justifyContent: "center",
-    marginLeft: 40,
-    marginRight: 40
+    marginLeft: 30,
+    marginRight: 30 
   },
   ViewButton: {
     backgroundColor: "#08088A",
@@ -148,10 +176,25 @@ const styles = StyleSheet.create({
   loginErrorMessage: {
     color: "#f00",
     textAlign: "center",
-    marginTop: 20
+    marginTop: 20,
+    marginBottom: 20
   },
   Divider:{
     backgroundColor :"#08088A",
     marginBottom :20
+  },
+  TextRegistro:{
+ 
+    marginTop : 15 ,
+    marginLeft : 15,
+    marginRight :15
+
+  },
+  btnRegister:{
+
+      color: "#00a680",
+      fontWeight : "bold",
+
+
   }
 });

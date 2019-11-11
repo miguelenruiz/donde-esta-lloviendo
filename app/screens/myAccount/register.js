@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
-import { Button, Text } from "react-native-elements";
+import { StyleSheet, View ,ActivityIndicator} from "react-native";
+import { Button, Text , Image } from "react-native-elements";
 import t from "tcomb-form-native";
 const Form = t.form.Form;
 import { RegisterStruct, RegisterOptions } from "../../forms/registro";
@@ -71,6 +71,13 @@ export default class Account extends Component {
     const { registerStruct, formErrorMessaje, registerOptions } = this.state;
     return (
       <View style={styles.viewBody}>
+          <Image
+          source={require("../../../assets/img/login-icon-png-0.jpg")}
+          containerStyle={styles.containerLogo}
+          style={styles.logo}
+          PlaceholderContent={<ActivityIndicator />}
+        />
+
         <Form
           ref="RegisterForm"
           type={registerStruct}
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
   viewBody: {
     flex: 1,
     backgroundColor: "#fff",
-    marginLeft: 40,
+    marginLeft: 40,   
     marginRight: 40,
     marginTop: 80
   },
@@ -118,5 +125,14 @@ const styles = StyleSheet.create({
     color: "#DF0101",
     textAlign: "center",
     marginTop: 30
-  }
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    
+  },
+  containerLogo: {
+    alignItems: "center",
+    marginBottom: 30 
+  },
 });

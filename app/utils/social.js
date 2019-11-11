@@ -1,5 +1,5 @@
 export  const facebookApi =  {
-        aplication_id : "3229337783805697",
+        aplication_id : "690543051439527",
         permissions :  ["public_profile"]
  
 
