@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
-import { Image, Button, SocialIcon ,Divider } from "react-native-elements";
+import { Image, Button, SocialIcon, Divider } from "react-native-elements";
 import { Assets } from "react-navigation-stack";
 import t from "tcomb-form-native";
 import { LoginStruct, LoginOptions } from "../../forms/login";
 import { validate } from "tcomb-validation";
 import Toast, { DURATION } from "react-native-easy-toast";
+<<<<<<< HEAD
 import firebase from 'firebase'
 import { facebookApi }  from '../../utils/social'; 
 import {Expo} from 'expo';
@@ -13,6 +14,10 @@ import * as Facebook from 'expo-facebook';
 
 
 
+=======
+import firebase from "firebase";
+import facebookApi from "../../utils/social";
+>>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
 
 const Form = t.form.Form;
 export default class Login extends Component {
@@ -28,7 +33,7 @@ export default class Login extends Component {
       },
       loginErrorMessage: ""
     };
- }
+  }
 
   login = formValue => {
     const validateForm = this.refs.loginForm.getValue();
@@ -54,8 +59,8 @@ export default class Login extends Component {
         });
     }
   };
- 
 
+<<<<<<< HEAD
   async loginFacebook  () {
   
    
@@ -86,6 +91,14 @@ export default class Login extends Component {
        
           
   
+=======
+  // permite login con facebook
+  loginFacebook = async () => {
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
+      facebookApi.aplication_id,
+      { permissions: facebookApi.permissions }
+    );
+>>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
   };
 
   onChangeFormLogin = formValue => {
@@ -124,17 +137,21 @@ export default class Login extends Component {
           
           >Registrate</Text></Text>
 
-          <Divider style= {styles.Divider} />
-        
+          <Divider style={styles.Divider} />
 
           <SocialIcon
-            title='Iniciar sesion con Facebook'
+            title="Iniciar sesion con Facebook"
             button
-            type='facebook'
-            onPress = {()=> this.loginFacebook()}
+            type="facebook"
+            onPress={() => this.loginFacebook()}
           />
 
+<<<<<<< HEAD
         <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
+=======
+          <SocialIcon title="Iniciar sesion con Google" button type="google" />
+          <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
+>>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
         </View>
         <Toast
           ref="toasLogin"
@@ -179,6 +196,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
+<<<<<<< HEAD
   Divider:{
     backgroundColor :"#08088A",
     marginBottom :20
@@ -196,5 +214,10 @@ const styles = StyleSheet.create({
       fontWeight : "bold",
 
 
+=======
+  Divider: {
+    backgroundColor: "#08088A",
+    marginBottom: 20
+>>>>>>> 0b82c782a00fbb55c939dda2b478110cc20789f1
   }
 });
