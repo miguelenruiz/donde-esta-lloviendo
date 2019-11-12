@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
-import { Image, Button, SocialIcon, Divider } from "react-native-elements";
-import { Assets } from "react-navigation-stack";
+import { Image, Button, Divider, SocialIcon } from "react-native-elements";
+import Toast, { DURATION } from "react-native-easy-toast";
 import t from "tcomb-form-native";
+import { Assets } from "react-navigation-stack";
+
 import { LoginStruct, LoginOptions } from "../../forms/login";
 import { validate } from "tcomb-validation";
-import Toast, { DURATION } from "react-native-easy-toast";
-import firebase from "firebase";
+
 import { facebookApi } from "../../utils/social";
 import { Expo } from "expo";
 import * as Facebook from "expo-facebook";
+import * as firebase from "firebase";
 
 const Form = t.form.Form;
 export default class Login extends Component {
@@ -28,9 +30,9 @@ export default class Login extends Component {
   }
 
   login = formValue => {
-    const validateForm = this.refs.loginForm.getValue();
+    const validate = this.refs.loginForm.getValue();
 
-    if (!validateForm) {
+    if (!validate) {
       this.setState({
         loginErrorMessage: "Escribio algo mal "
       });
@@ -38,9 +40,9 @@ export default class Login extends Component {
       this.setState({
         loginErrorMessage: " "
       });
-      fireBase
+      firebase
         .auth()
-        .signInWithEmailAndPassword(validateForm.email, validateForm.password)
+        .signInWithEmailAndPassword(validate.email, validate.password)
         .then(() => {
           this.refs.toasLogin.show("Login correcto socio ", 200, () => {
             this.props.navigation.goBack();
@@ -109,7 +111,6 @@ export default class Login extends Component {
             onPress={() => this.loginFacebook()}
           />
 
-          <SocialIcon title="Iniciar sesion con Google" button type="google" />
           <Text style={styles.loginErrorMessage}>{loginErrorMessage}</Text>
         </View>
         <Toast

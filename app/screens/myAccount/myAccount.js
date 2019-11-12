@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import * as fireBase from "firebase";
-import  MyAccountGuest  from "../../components/MyAccount/MyAccountGuest";
+import MyAccountGuest from "../../components/MyAccount/MyAccountGuest";
+import MyAccountUser from "../../components/MyAccount/MyAccountUser";
 
 export default class Account extends Component {
   constructor(props) {
@@ -38,15 +39,10 @@ export default class Account extends Component {
     const { login } = this.state;
 
     if (login) {
-      return (
-        <View style={styles.viewBody}>
-          <Text>Estas logeado perro </Text>
-          <Button title="Cerrar Sesion" onPress={() => this.logout()} />
-        </View>
-      );
+      return <MyAccountUser />;
     } else {
       return (
-        <MyAccountGuest  goToScreen ={this.goToScreen}/>
+        <MyAccountGuest goToScreen={this.goToScreen} />
         // <View style={styles.viewBody}>
         //   <Button
         //     title="Registro"
