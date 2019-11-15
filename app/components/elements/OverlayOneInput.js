@@ -8,11 +8,7 @@ export default class OverlayOneInput extends Component {
   }
   render() {
     return (
-      <Overlay
-        isVisible={true}
-        overlayBackgroundColor="transparent"
-        overlayStyle={styles.OverlayStyle}
-      >
+      <Overlay overlayStyle={styles.OverlayStyle} isVisible={false}>
         <View style={styles.viewOverlay}>
           <Input
             containerStyle={styles.inputContainer}
@@ -29,13 +25,21 @@ export default class OverlayOneInput extends Component {
 
 const styles = StyleSheet.create({
   OverlayStyle: {
+    flex: 1,
+
     alignItems: "center",
     justifyContent: "center"
   },
   viewOverlay: {
+    flex: 1,
     width: "100%",
     backgroundColor: "#fff",
-    padding: 20
+    padding: 20,
+    borderColor: "#00a680",
+    borderLeftWidth: 2,
+    borderRightWidth: 2,
+    borderTopWidth: 2,
+    borderBottomWidth: 2
   },
   inputContainer: {
     marginBottom: 20
